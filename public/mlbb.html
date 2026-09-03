@@ -732,7 +732,16 @@ async function checkNicknameMLBB(userId, zoneId) {
   resultBox.innerText = "⏳ Mengecek Nickname...";
 
   try {
-    const res = await fetch(`http://localhost:8000/api/check?game=mobile-legends&user_id=${userId}&zone_id=${zoneId}`);
+    const res = await fetch('/api/check-nickname', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                targetId: userId,
+                zoneId: zoneId
+            })
+        });
     const data = await res.json();
 
     if (data.success) {
